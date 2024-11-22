@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService } from 'src/app/services/examen.service';
 
 @Component({
-  selector: 'app-pokemon-list',
-  templateUrl: './pokemon-list.page.html',
-  styleUrls: ['./pokemon-list.page.scss'],
+  selector: 'app-consumo-api',
+  templateUrl: './consumo-api.page.html',
+  styleUrls: ['./consumo-api.page.scss'],
 })
 export class PokemonListPage implements OnInit {
   libros: any[] = [];
