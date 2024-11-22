@@ -1,39 +1,64 @@
 import { Component, OnInit } from '@angular/core';
-import { ExamenService } from '../../services/examen.service';
+import { PokemonService } from 'src/app/services/examen.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './consumo-api.page.html',
-  styleUrls: ['./consumo-api.page.scss']
+  selector: 'app-pokemon-list',
+  templateUrl: './pokemon-list.page.html',
+  styleUrls: ['./pokemon-list.page.scss'],
 })
-export class AppComponent implements OnInit {
-  dogImage: string = '';
-  robotImage: string = '';
-  books: any;
-  errorMessage: string ='';
+export class PokemonListPage implements OnInit {
+  libros: any[] = [];
+  filteredlibros: any[] = [];
+  loading = false;
+  errorMessage: string | null = null;
+  robotImage: string | null = null;
 
-  constructor(private examenService: ExamenService) { }
+  constructor(private pokemonService: PokemonService) {}
 
-  ngOnInit(): void {
-    // Obtener imagen aleatoria de perro
-    this.examenService.getDog().subscribe((response) => {
-      console.log('Respuesta de perro:', response);
-      if (response.message) {
-        this.dogImage = response.message;
-      } else {
-        this.errorMessage = response.message;
-      }
-    });
-  
-    // Obtener libros de Gutendex
-    this.examenService.getBooks().subscribe((response) => {
-      console.log('Respuesta de libros:', response); // Log para verificar la respuesta
-      if (response.results && response.results.length > 0) {
-        this.books = response.results;  // Asignamos los datos de los libros
-      } else {
-        this.errorMessage = 'No se encontraron libros.';
-      }
+  ngOnInit() {
+    this.fetchLibros();
+    
+  }
+
+  fetchLibros() {
+    this.loading = true;
+    this.pokemonService.getlibros(10).subscribe({
+      next: (response) => {
+        this.libros = response.results.slice(0, 10);
+        this.filteredlibros = this.libros;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching Pokémon:', error);
+        this.loading = false;
+      },
     });
   }
-  
+
+  getRandomRobot() {
+    this.loading = true;
+    this.pokemonService.getImageRobots().subscribe({
+      next: () => {
+        const randomName = this.generateRandomLetters();
+        this.robotImage = `${this.pokemonService['apiUrl2']}${randomName}`;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching robot image:', error);
+        this.robotImage = null;
+        this.loading = false;
+      },
+    });
+  }
+
+  generateRandomLetters(length: number = 5): string {
+    const characters = 'abcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+
+
 }

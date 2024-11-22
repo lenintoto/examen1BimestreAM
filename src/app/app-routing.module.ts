@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'consumo-api',
-    loadChildren: () => import('./pages/consumo-api/consumo-api.module').then( m => m.ConsumoApiPageModule)
+    loadChildren: () => import('./pages/consumo-api/consumo-api.module').then( m => m.PokemonListPageModule)
   },
 ];
 

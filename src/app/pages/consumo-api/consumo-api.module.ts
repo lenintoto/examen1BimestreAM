@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ConsumoApiPageRoutingModule } from './consumo-api-routing.module';
+import { PokemonListPageRoutingModule } from './consumo-api-routing.module';
 
-import { AppComponent } from './consumo-api.page';
+import { PokemonListPage } from './consumo-api.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConsumoApiPageRoutingModule
+    PokemonListPageRoutingModule
   ],
-  declarations: [AppComponent]
+  declarations: [PokemonListPage]
 })
-export class ConsumoApiPageModule {}
+export class PokemonListPageModule {}
