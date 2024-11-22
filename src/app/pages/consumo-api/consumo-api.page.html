@@ -1,0 +1,29 @@
+<!-- consumo-api.page.html -->
+<div>
+  <h2>Imagen Aleatoria de Perro</h2>
+  <div *ngIf="dogImage; else loading">
+    <img [src]="dogImage" alt="Imagen del perro" />
+  </div>
+  <ng-template #loading>
+    <p>Cargando imagen de perro...</p>
+  </ng-template>
+</div>
+
+<div>
+  <h2>Libros Obtenidos</h2>
+  <div *ngIf="books && books.length > 0; else noBooks">
+    <ul>
+      <li *ngFor="let book of books">
+        <strong>{{ book.title }}</strong> - {{ book.author_name }}
+      </li>
+    </ul>
+  </div>
+  <ng-template #noBooks>
+    <p>No se encontraron libros.</p>
+  </ng-template>
+</div>
+
+<!-- Mostrar error en caso de que haya alguno -->
+<div *ngIf="errorMessage">
+  <p>{{ errorMessage }}</p>
+</div>
