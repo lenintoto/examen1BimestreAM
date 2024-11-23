@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs'; 
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class PokemonService {
-  private apiUrl2 = 'https://robohash.org/';
-  private apiUrl = 'https://gutendex.com/books/?ids=1';
+export class ExamenService {
+  private apiDog = 'https://dog.ceo/api/breeds/image/random';
+  private apiGutendex = 'https://gutendex.com/books/?ids=1,2,3,4,5,6,7,8,9,10';
 
-  constructor(private http: HttpClient) {}
-  // constructor(private http: HttpClient, private firestore: AngularFirestore) {}
+  constructor(private http: HttpClient) { }
 
-  // Obtener la lista de Pokémon
-  getlibros(limit: number = 5, offset: number = 0): Observable<any> {
-    return this.http.get(`${this.apiUrl}?limit=${limit}&offset=${offset}`);
-                                          
+  getDog(): Observable<any> {
+    return this.http.get<any>(this.apiDog).pipe(
+      catchError(error => {
+        console.error('Error al obtener perro', error);
+        return of({ message: 'Error al obtener la imagen' });
+      })
+    );
   }
-
-  // Obtener detalles de un Pokémon por nombre o ID
-  getImageRobots(): Observable<any> {
-    const randomName = this.generateRandomLetters();
-    return this.http.get(`${this.apiUrl2}${randomName}`);
+  
+  getBooks(): Observable<any> {
+    return this.http.get<any>(this.apiGutendex).pipe(
+      catchError(error => {
+        console.error('Error al obtener libros', error);
+        return of({ results: [] });
+      })
+    );
   }
-
-  // Generar un nombre aleatorio con letras
-  private generateRandomLetters(length: number = 5): string {
-    const characters = 'abcdefghijklmnopqrstuvwxyz';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return result;
-  }  
 }

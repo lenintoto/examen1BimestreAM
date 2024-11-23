@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
 import { getFirestore } from '@angular/fire/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
-  constructor(private firestore: Firestore) {}
+  private firestoreInstance = getFirestore();
 
-  saveData(data: any) {
-    //const firestoreInstance = getFirestore(this.firestore);
-    //return firestoreInstance.collection('miprimeraapp').add(data);
+  constructor() { }
+
+  saveData(dogImages: string[], books: any[]) {
+    const data = {
+      dogImages: dogImages,
+      books: books,
+      timestamp: new Date()
+    };
+    const dogImagesCollection = collection(this.firestoreInstance, 'examenAppsMoviles');
+    return addDoc(dogImagesCollection, data);
   }
-} 
+}

@@ -1,25 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Libros y Robots List</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <button style="align-items: center;">
-    Enviar
-  </button>
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-  <ion-list>
-    <ion-item *ngFor="let libro of filteredlibros">
-      <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
-        <ion-label>{{ libro.title | titlecase }}</ion-label>
-        <img
-          [src]="'https://robohash.org/' + generateRandomLetters()"
-          alt="Robot Image"
-          style="margin-top: 10px; width: 100px; height: auto;"
-        >
+<div class="container">
+  <h2>Imágenes Aleatorias de Perros</h2>
+  <div class="scrollable-container">
+    <div class="image-grid">
+      <div *ngFor="let image of dogImages" class="image-item">
+        <img [src]="image" alt="Imagen del perro" />
       </div>
-    </ion-item>
-  </ion-list>
-  <ion-spinner *ngIf="loading" class="loading-spinner"></ion-spinner>
-</ion-content>
+    </div>
+
+    <h2>Libros Obtenidos</h2>
+    <div *ngIf="books && books.length > 0; else noBooks">
+      <ul class="book-list">
+        <li *ngFor="let book of books" class="book-item">
+          <strong>{{ book.title }}</strong> - {{ book.author_name }}
+        </li>
+      </ul>
+    </div>
+    <ng-template #noBooks>
+      <p>No se encontraron libros.</p>
+    </ng-template>
+
+    <button>Guardar Datos</button>
+    <!--(click)="saveData()"-->
+  </div>
+</div>

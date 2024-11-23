@@ -4,14 +4,21 @@
 
 export const environment = {
   production: false,
-  firebaseConfig : {
-    apiKey: "",
+  firebaseConfig: {
+    /*apiKey: "",
     authDomain: "",
     projectId: "",
     storageBucket: "",
     messagingSenderId: "",
     appId: "",
-    measurementId: ""
+    measurementId: ""*/
+    apiKey: "AIzaSyDcO7grcKXeVMaQfUwiEpYVD0DQCAwpkU4",
+    authDomain: "appmovi2024b.firebaseapp.com",
+    projectId: "appmovi2024b",
+    storageBucket: "appmovi2024b.firebasestorage.app",
+    messagingSenderId: "979394627048",
+    appId: "1:979394627048:web:23f956139e3c88b986505d",
+    measurementId: "G-Z221XSWH0K"
   }
 };
 
