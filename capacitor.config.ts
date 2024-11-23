@@ -3,7 +3,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'com.example.app',
   appName: 'examenApps',
-  webDir: 'dist/my-app',
+  webDir: 'www',
   bundledWebRuntime: false,
   plugins: {
     SplashScreen: {
